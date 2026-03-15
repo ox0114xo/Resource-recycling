@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-up:   #22c55e;
+  --color-down: #ef4444;
+  --color-flat: #6b7280;
+}
+
+/* 滾動條樣式 */
+::-webkit-scrollbar        { width: 6px; height: 6px; }
+::-webkit-scrollbar-track  { background: #0d1117; }
+::-webkit-scrollbar-thumb  { background: #30363d; border-radius: 3px; }
+
+/* 卡片基底 */
+@layer components {
+  .card {
+    @apply bg-surface-card border border-surface-border rounded-xl p-5;
+  }
+  .btn-primary {
+    @apply bg-brand-600 hover:bg-brand-500 text-white font-medium
+           px-5 py-2.5 rounded-lg transition-colors duration-150 text-sm;
+  }
+  .btn-ghost {
+    @apply border border-surface-border hover:border-brand-600 hover:text-brand-400
+           text-gray-400 px-4 py-2 rounded-lg transition-colors duration-150 text-sm;
+  }
+  .label {
+    @apply text-xs text-gray-500 uppercase tracking-widest font-mono;
+  }
+  .price-up   { @apply text-green-400; }
+  .price-down { @apply text-red-400;   }
+  .badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full
+           text-xs font-mono font-medium;
+  }
+}
+
+/* 數字閃爍動畫（價格更新時） */
+@keyframes priceTick {
+  0%   { opacity: 0.3; transform: scale(0.97); }
+  50%  { opacity: 1;   transform: scale(1.02); }
+  100% { opacity: 1;   transform: scale(1); }
+}
+.price-tick { animation: priceTick 0.4s ease-out; }
+
+/* 網格背景紋路 */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(22, 163, 74, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 163, 74, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}

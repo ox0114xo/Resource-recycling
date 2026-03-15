@@ -1,0 +1,25 @@
+name: 每日爬蟲 - 更新回收牌價
+
+on:
+  schedule:
+    # 每天早上 8:00 台灣時間（UTC+8 = UTC 00:00）
+    - cron: '0 0 * * *'
+  # 也可以手動觸發
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 觸發 Vercel 爬蟲 API
+        run: |
+          curl -X POST "${{ secrets.APP_URL }}/api/scrape" \
+            -H "x-scrape-secret: ${{ secrets.SCRAPE_SECRET }}" \
+            -H "Content-Type: application/json" \
+            --fail \
+            --silent \
+            --show-error \
+            --max-time 30
+
+      - name: 完成
+        run: echo "爬蟲完成 $(date)"
