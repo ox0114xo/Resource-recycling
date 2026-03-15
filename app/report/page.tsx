@@ -20,7 +20,7 @@ export default function ReportPage() {
     fetch('/api/items').then(r => r.json()).then(setItems)
   }, [])
 
-  const categories = [...new Set(items.map(i => i.category))]
+  const categories = Array.from(new Set(items.map(i => i.category))]
   const filteredItems = items.filter(i => !category || i.category === category)
   const selectedItem = items.find(i => String(i.id) === itemId)
 
